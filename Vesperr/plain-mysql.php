@@ -34,29 +34,29 @@
 
 <body>
 
-<?php
+  <?php
 
-include('myconexion.php');
+  include('myconexion.php');
 
-if(isset($_REQUEST['guardar'])){
+  if(isset($_REQUEST['guardar'])){
 
-$sql = $_REQUEST["consulta"];
+  $sql = $_REQUEST["consulta"];
 
-if (!$conectar->query($sql)) {
-  echo '<script> 
-  alert("Falló la creación: ('.$conectar->errno.') '.$conectar->error.'");
-  </script>';
-}else{
-  echo '<script>
-    alert("Ejecutado Satifactoriamente");
-  </script>';
-}
+  if (!$conectar->query($sql)) {
+    echo '<script> 
+    alert("Falló la creación: ('.$conectar->errno.') '.$conectar->error.'");
+    </script>';
+  }else{
+    echo '<script>
+      alert("Ejecutado Satifactoriamente");
+    </script>';
+  }
 
-}
+  }
 
-$conectar->close();
+  $conectar->close();
 
-?>
+  ?>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
@@ -233,9 +233,9 @@ $conectar->close();
 
         <div class="row justify-content-center">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
 
-              <h5>SQL Server</h5>
+              <h4>MySQL</h4>
             <table class="table table-sm table-hover">
               <thead class="thead-light">
                 <tr>
@@ -244,30 +244,20 @@ $conectar->close();
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Alumnos</td>
-                </tr>
-              </tbody>
-            </table>
+              <?php
+              include('myconexion.php');
 
-          </div>
+              $resultado = $conectar->query("SHOW TABLES");
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-
-              <h5>MySQL</h5>
-            <table class="table table-sm table-hover">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nombre</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Alumnos</td>
-                </tr>
+              $i = 1;
+              while($fila = $resultado->fetch_array()) {
+                echo '<tr>';
+                echo '<th scope="row">'.$i.'</th>';
+                echo '<td>'.$fila[0].'</td>';
+                echo '</tr>';
+                $i++;
+              }
+              ?>
               </tbody>
             </table>
 
