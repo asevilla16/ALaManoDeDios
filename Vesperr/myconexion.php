@@ -18,14 +18,11 @@ $user = "root";
 $password = "";
 $bd = "proyectodb";
 
-$conectar = mysqli_connect($host, $user, $password, $bd);
+$conectar = new mysqli($host, $user, $password, $bd);
 
-if($conectar){
-    echo "conexion exitosa";
-}else{
-    echo "fallo en la conexion";
-    die(print_r(mysqli_connect_error(), true));
+if ($conectar->connect_errno) {
+    echo "Falló la conexión a MySQL:
+    (" . $conectar->connect_errno . ") " . $conectar->connect_error;
 }
-
 
 ?>

@@ -32,22 +32,31 @@
 
 </head>
 
-<?php
-$con = include('myconexion.php');
+<body>
 
-if(isset($_POST['guardar'])){
-  $txtConsulta = (isset($_POST['consulta'])) ? $_POST['consulta'] : "";
-  $sentencia = $pdo -> prepare(":consulta");
-  $sentencia -> bindParam(":consulta", $txtConsulta);
-  $sentencia -> execute();
+<?php
+
+include('myconexion.php');
+
+if(isset($_REQUEST['guardar'])){
+
+$sql = $_REQUEST["consulta"];
+
+if (!$conectar->query($sql)) {
+  echo '<script> 
+  alert("Falló la creación: ('.$conectar->errno.') '.$conectar->error.'");
+  </script>';
+}else{
+  echo '<script>
+    alert("Ejecutado Satifactoriamente");
+  </script>';
 }
 
+}
 
-
+$conectar->close();
 
 ?>
-
-<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
@@ -130,13 +139,15 @@ if(isset($_POST['guardar'])){
                 <form action="" method="POST">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Query:</label>
-                    <textarea name="consulta" class="form-control" id="message-text"></textarea>
+                    <textarea name="consulta" value="<?php echo $con ?>" placeholder="Ingrese Consulta SQL" class="form-control" id="message-text"></textarea>
                   </div>
+
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button name="guardar" type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+
                 </form>
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button name="guardar" type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>

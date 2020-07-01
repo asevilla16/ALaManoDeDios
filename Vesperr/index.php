@@ -207,7 +207,7 @@
             <a href="#hero" class="scrollto">Inicio</a>
             <a href="#about" class="scrollto">Proyecto</a>
             <a href="#sqlserver">SQl Server</a>
-            <a href="#mysql">MySQl</a>
+            <a href="plain-mysql.php">MySQl</a>
           </nav>
         </div>
       </div>
